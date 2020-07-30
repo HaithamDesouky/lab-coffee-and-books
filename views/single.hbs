@@ -1,0 +1,44 @@
+Hey individual!
+
+
+
+<h1>{{place.name}}</h1>
+<h2>{{place.type}}</h2>
+<em><strong>Coordinates:</strong>  Latitute: {{place.location.coordinates.[0]}}, Longitude: {{place.location.coordinates.[1]}}</em>
+
+<form action="/place/{{place.id}}/delete" method="post"> <button>Delete this place</button></form>
+
+
+<a href="/place/{{place.id}}/edit">Edit this place!</a>
+
+
+
+
+
+<div id="map-container"></div>
+
+<script>
+  function init () {
+    const mapContainerElement = document.getElementById('map-container');
+    const map = new window.google.maps.Map(mapContainerElement, {
+      center: {
+        lat: 38.75,
+        lng: -9.15
+      },
+      zoom: 11
+    });
+
+     const latitude = {{ place.location.coordinates.[0] }};
+    const longitude= {{ place.location.coordinates.[1] }};
+    const marker = new window.google.maps.Marker({
+      map,
+      position: {
+        lat: latitude,
+        lng: longitude
+      }
+    });
+   
+  }
+</script>
+
+{{>mapscript}}
